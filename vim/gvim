@@ -1,0 +1,17 @@
+set gfn=Monaco:h14
+if has("gui_macvim")
+  "ruby color scheme
+ "colorscheme railscasts
+ colorscheme blackboard
+ " macmenu &File.New\ Window key=<nop>
+ " map <D-t> :CommandT<CR>
+ " macmenu &Tools.Make key=<nop>
+ " map <D-b> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+endif
+
+"set go-=T
+"set bg=dark
+"if &background == "dark"
+"  hi normal guibg=black
+"  set transp=8
+"endif
