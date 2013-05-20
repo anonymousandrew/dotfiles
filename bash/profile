@@ -3,8 +3,6 @@ export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 
 alias ls='ls -G'
-alias hal='ssh achang@hal.rescomp.berkeley.edu'
-alias rirc='ssh achang@irc.housing.berkeley.edu'
 
 #shell exports
 export VISUAL="mvim"
