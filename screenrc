@@ -1,0 +1,8 @@
+defscrollback 100000
+startup_message off
+autodetach on
+escape ^Oo # Escape character is now O
+termcapinfo xterm* ti@:te@    # For mouse scroll
+altscreen on    # Clear screen after quitting vim
+hardstatus alwayslastline
+hardstatus string '%{= kG}[ %{G}%H | %{=kw}%?%-Lw%?%{g}%n*%f%t%?(%u)%? %{g}]%{w}%?%+Lw%?%?%=%{g}[ %{K}%l %{g}][ %{B}%Y-%m-%d %{W    }%c %{g}]'
