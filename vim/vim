@@ -1,76 +1,58 @@
-" Tell vim to remember certain things when we exit
-"  '10  :  marks will be remembered for up to 10 previously edited files
-"  "100 :  will save up to 100 lines for each register
-"  :20  :  up to 20 lines of command-line history will be remembered
-"  %    :  saves and restores the buffer list
-"  n... :  where to save the viminfo files
-set viminfo='10,\"100,:20,%,n~/.viminfo
-" YOINKED FROM CCOWART!!!
-set nocompatible
+execute pathogen#infect()
 
-" allow backspacing over everything in insert mode
-set backspace=eol,indent,start
+"""""""""""""""""""""""""""""""""""""
+" Local overrides                   "
+"""""""""""""""""""""""""""""""""""""
+source ~/.vimrc_local
 
-" Make a backup before overwriting a file.  The backup is removed 
-" after the file was successfully written
-set writebackup
-
-set ruler		" Show the cursor position all the time 
-set expandtab		" Expand tabs into spaces
-set showmatch		" Match Parens
-set matchtime=500	" Match for half a second
-set autoindent		" Always have autoindenting on
-set shiftwidth=2	" Autoindenting uses this spacing
-set tabstop=2		" Show tabs as 2 spaces
-set smarttab		
-set shiftround		" Round to the nearest indent level
-set pastetoggle=<F3>	" Toggle our paste mode to not indent
-set number			" show line numbers
-
-" Better search options
-set ignorecase		
-set incsearch		" incremental search
-set hls				" highlight your results
-
-" Concessions to modernity
-set mouse=a
-" this line was for iterm2
-" set t_Co=256
-set guifont=Monaco:h14
-set guifont=PragmataPro
-
-" Make vim smart
 syntax on
-filetype plugin on
-filetype indent on
-" Autocommands
-au BufNewFile,BufRead notes iab <expr> dts strftime("%d %B %Y %I:%M%p")
-if filereadable(expand('~/.local_vimrc'))
-	au VimEnter * so ~/.local_vimrc
-endif
+filetype plugin indent on
+set nocompatible
+set ruler
+set mouse=a
+set showmatch  " Show matching braces/brackets
+set number  " Show line numbers
+set expandtab  " Expand tabs into spaces
+set tabstop=2   "show tabas as two spaces
+set softtabstop=2 " Make tabs act like spaces for editing ops
+set autoindent  "always have autoidenting on
+set shiftwidth=2  "autoindent uses this space
+set shiftround
+set smarttab
+set cursorline  "highlight current line
+set winwidth=80
+set wrap
+set title       "let vim change tab/window title
 
+" where to open splits
+set splitbelow
+set splitright
+
+"""""""""""""""""""""""""""""""""""""
+"search options                     "
+"""""""""""""""""""""""""""""""""""""
+set ignorecase smartcase "case insensitive only if they contain upper-case characters
+set incsearch   "incremental search
+" Use <C-L> to clear the highlighting of :set hlsearch.
+if maparg('<C-L>', 'n') ==# ''
+  nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
+endif
+set hls         "highlight results
+
+" status line
+set statusline=2
+:set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
+
+
+"""""""""""""""""""""""""""""""""""""
+" Custom bindings                   "
+"""""""""""""""""""""""""""""""""""""
 " Lets you ctrl+hjkl to move between splits
 map <C-k> <C-w><Up>
 map <C-j> <C-w><Down>
 map <C-l> <C-w><Right>
 map <C-h> <C-w><Left>
-
-let g:CommandTMatchWindowAtTop = 1
-let g:CommandTMaxHeight = 15
-let g:CommandTMaxDepth = 20
-let g:CommandTMaxFiles = 15000
-let g:CommandTCancelMap=['<ESC>','<C-c>']
-
-set wildignore +=.git,vendor/bundle
-
-let Tlist_Use_Right_Window = 1
-
-" Map F4 to show taglist (requires ctags+ctags vim plugin)
-map <F4> :Tlist<CR>
-map <Leader>f :CommandT <CR>
-map <Leader>b :FufBuffer <CR>
-
-" Fix the damn typos
+" Fix typos
 command! Q  quit
 command! W  write
 command! Wq wq
@@ -80,25 +62,22 @@ command! QA qa
 command! Wqa wqa
 command! WQa wqa
 command! WQA wqa
-
-"t = Auto-wrap text using textwidth
-"c Auto-wrap comments using textwith, inserts comment leader
-"r Autoinsert comment leader in insert mode
-"q allow formatting of comments with 'gq'
-"a autoformatting of paragraphs
-"n recognize numbered lists when formatting text
-"2 use the indentation of the second line of the paragraph to format the
-"  paragraph
-"b auto-wrap at blanks at or before 'textwidth'
-"l long lines are not broken in insert mode (!!)
-set formatoptions=cqnb
-"set formatoptions+=ta2
-
-" Mappings
-" run one rspec example or describe block based on cursor position
-"map !s :RunSpecLine<CR>
-" run full rspec file
-"map !S :RunSpec<CR>
-
-" prevent compiling with shift-K
 map K gk
+
+"show at least one line around cursor
+if !&scrolloff
+  set scrolloff=1
+endif
+if !&sidescrolloff
+  set sidescrolloff=5
+endif
+set display+=lastline
+
+" CtrlP Settings
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+
+" Set colors to grb256
+set t_Co=256
+colorscheme grb256
+" Fix Visual on some dark backgrounds
+:hi Visual           guibg=#5A647E ctermbg=60
