@@ -79,7 +79,3 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 " Set colors to grb256
 set t_Co=256
 colorscheme grb256
-" Fix Visual on some dark backgrounds
-:hi Visual           guibg=#5A647E ctermbg=60
-:hi Todo ctermfg=15 ctermbg=9 guibg=#592929
-:hi Search term=standout ctermfg=0 ctermbg=11 guifg=Black guibg=Yellow
