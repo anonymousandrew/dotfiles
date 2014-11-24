@@ -85,3 +85,4 @@ set t_Co=256
 colorscheme grb256
 " Fix Visual on some dark backgrounds
 :hi Visual guibg=#5A647E ctermbg=60
+set completeopt-=preview
